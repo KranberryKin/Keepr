@@ -1,34 +1,61 @@
 using System.Collections.Generic;
 using Keepr.Interfaces;
 using Keepr.Models;
+using Keepr.Repositories;
 
 namespace Keepr.Services
 {
   public class VaultsService : IService<Vault>
   {
+    private readonly VaultsRepository _vr;
+
+    public VaultsService(VaultsRepository vr)
+    {
+      _vr = vr;
+    }
+
     public Vault Create(Vault data)
     {
-      throw new System.NotImplementedException();
+      return _vr.Create(data);
     }
 
-    public void Delete(int id)
+    public void Delete(int id, string userId)
     {
-      throw new System.NotImplementedException();
+      var foundVault = Get(id);
+      if (foundVault.CreatorId != userId)
+      {
+        throw new System.Exception("You Can't Delete This!");
+      }
+      _vr.Delete(id);
     }
 
-    public Vault Edit(Vault data)
+
+    public Vault Edit(Vault data, string userId)
     {
-      throw new System.NotImplementedException();
+      var foundVault = Get(data.Id);
+      if (foundVault.CreatorId != userId)
+      {
+        throw new System.Exception("You Can't Edit This!");
+      }
+      foundVault.Name = data.Name ?? foundVault.Name;
+      foundVault.Description = data.Description ?? foundVault.Description;
+      foundVault.IsPrivate = data.IsPrivate ?? foundVault.IsPrivate;
+      return _vr.Edit(foundVault);
     }
 
     public List<Vault> Get()
     {
-      throw new System.NotImplementedException();
+      return _vr.Get();
     }
 
     public Vault Get(int id)
     {
-      throw new System.NotImplementedException();
+      var vault = _vr.Get(id);
+      if (vault == null)
+      {
+        throw new System.Exception("Can't Find Vault");
+      }
+      return vault;
     }
   }
 }

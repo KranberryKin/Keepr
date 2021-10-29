@@ -11,12 +11,12 @@ namespace Keepr.Services
       throw new System.NotImplementedException();
     }
 
-    public void Delete(int id)
+    public void Delete(int id, string userId)
     {
       throw new System.NotImplementedException();
     }
 
-    public Profile Edit(Profile data)
+    public Profile Edit(Profile data, string userId)
     {
       throw new System.NotImplementedException();
     }

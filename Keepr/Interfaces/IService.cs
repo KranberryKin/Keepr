@@ -21,10 +21,10 @@ namespace Keepr.Interfaces
     /// Takes updated 
     /// </summary>
     /// <returns>Edited Object</returns>
-    T Edit(T data);
+    T Edit(T data, string id);
     /// <summary>
     /// Finds item by it's Id and removes it form the database.
     /// </summary>
-    void Delete(int id);
+    void Delete(int id, string userId);
   }
 }

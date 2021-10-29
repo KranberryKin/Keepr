@@ -7,7 +7,7 @@ namespace Keepr.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class VaultKeepController : ControllerBase
+    public class VaultKeepsController : ControllerBase
         {
             [HttpGet]
             public ActionResult<List<VaultKeep>> Get(){

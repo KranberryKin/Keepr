@@ -69,9 +69,8 @@ namespace Keepr.Controllers
               try
               {
                    Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-                   keepdata.CreatorId = userInfo.Id;
                    keepdata.Id = keepId;
-                   var keep = _ks.Edit(keepdata);
+                   var keep = _ks.Edit(keepdata, userInfo.Id);
                    return Ok(keep);
               }
               catch (System.Exception e)

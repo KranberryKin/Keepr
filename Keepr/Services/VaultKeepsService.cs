@@ -11,12 +11,12 @@ namespace Keepr.Services
       throw new System.NotImplementedException();
     }
 
-    public void Delete(int id)
+    public void Delete(int id, string userId)
     {
       throw new System.NotImplementedException();
     }
 
-    public VaultKeep Edit(VaultKeep data)
+    public VaultKeep Edit(VaultKeep data, string userId)
     {
       throw new System.NotImplementedException();
     }
