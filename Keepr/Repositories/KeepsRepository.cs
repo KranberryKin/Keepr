@@ -16,30 +16,76 @@ namespace Keepr.Repositories
       _db = db;
     }
 
-    public Keep Create(int id)
+    public Keep Create(Keep keepdata)
     {
-      throw new System.NotImplementedException();
+      string sql = @"
+      INSERT INTO keeps(creatorId, name, description, img)
+      VALUES(@CreatorId, @Name, @Description, @Img);
+      SELECT LAST_INSERT_ID();
+      ";
+      var id = _db.ExecuteScalar<int>(sql, keepdata);
+      keepdata.Id = id;
+      return keepdata;
     }
+
 
     public void Delete(int id)
     {
-      throw new System.NotImplementedException();
+      string sql = "DELETE FROM keeps WHERE id = @id LIMIT 1;";
+      var rowsAffected = _db.Execute(sql, new {id});
+      if (rowsAffected == 0)
+      {
+        throw new System.Exception("Updating Keep Failed!");
+      }
     }
 
-    public Keep Edit(int id, Keep data)
+    public Keep Edit(Keep data)
     {
-      throw new System.NotImplementedException();
+      string sql = @"
+      UPDATE keeps
+      SET
+      name = @Name,
+      description = @Description,
+      img = @Img
+      WHERE id = @Id LIMIT 1;
+      ";
+      var rowsAffected = _db.Execute(sql, data);
+      if (rowsAffected == 0)
+      {
+        throw new System.Exception("Update Failed");
+      }
+      return data;
     }
 
     public List<Keep> Get()
     {
-      string sql = "SELECT * FROM keeps;";
-      return _db.Query<Keep>(sql).ToList();
+      string sql = @"
+      SELECT
+      k.*,
+      a.*
+      FROM keeps k
+      JOIN accounts a ON a.id = k.creatorId;";
+      return _db.Query<Keep, Profile, Keep>(sql, (k, a) => 
+      {
+        k.Creator = a;
+        return k;
+      }).ToList();
     }
 
-    public Keep Get(int id)
+    public Keep Get(int keepId)
     {
-      throw new System.NotImplementedException();
+      string sql = @"
+      SELECT
+       k.*,
+       a.*
+       FROM keeps k
+       JOIN accounts a ON a.id = k.creatorId
+       WHERE k.id = @keepId;";
+      return _db.Query<Keep, Profile, Keep>(sql, (k, a) => 
+      {
+        k.Creator = a;
+        return k;
+      }, new {keepId}).FirstOrDefault();
     }
   }
 }

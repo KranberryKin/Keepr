@@ -6,7 +6,7 @@ namespace Keepr.Services
 {
   public class ProfilesService : IService<Profile>
   {
-    public Profile Create(int id)
+    public Profile Create(Profile data)
     {
       throw new System.NotImplementedException();
     }
@@ -16,7 +16,7 @@ namespace Keepr.Services
       throw new System.NotImplementedException();
     }
 
-    public Profile Edit(int id, Profile data)
+    public Profile Edit(Profile data)
     {
       throw new System.NotImplementedException();
     }

@@ -4,8 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Keepr.Controllers
 {
-  public partial class AccountController
-  {
+    [ApiController]
+    [Route("api/[controller]")]
     public class ProfileController : ControllerBase
         {
             [HttpGet]
@@ -20,7 +20,4 @@ namespace Keepr.Controllers
                 }
             }
         }
-    }
-
-
 }

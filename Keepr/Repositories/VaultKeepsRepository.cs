@@ -14,7 +14,7 @@ namespace Keepr.Repositories
       _db = db;
     }
 
-    public VaultKeep Create(int id)
+    public VaultKeep Create(VaultKeep data)
     {
       throw new System.NotImplementedException();
     }
@@ -24,7 +24,7 @@ namespace Keepr.Repositories
       throw new System.NotImplementedException();
     }
 
-    public VaultKeep Edit(int id, VaultKeep data)
+    public VaultKeep Edit(VaultKeep data)
     {
       throw new System.NotImplementedException();
     }

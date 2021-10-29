@@ -14,7 +14,7 @@ namespace Keepr.Repositories
       _db = db;
     }
 
-    public Profile Create(int id)
+    public Profile Create(Profile data)
     {
       throw new System.NotImplementedException();
     }
@@ -24,7 +24,7 @@ namespace Keepr.Repositories
       throw new System.NotImplementedException();
     }
 
-    public Profile Edit(int id, Profile data)
+    public Profile Edit(Profile data)
     {
       throw new System.NotImplementedException();
     }

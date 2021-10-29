@@ -6,7 +6,7 @@ namespace Keepr.Services
 {
   public class VaultKeepsService : IService<VaultKeep>
   {
-    public VaultKeep Create(int id)
+    public VaultKeep Create(VaultKeep data)
     {
       throw new System.NotImplementedException();
     }
@@ -16,7 +16,7 @@ namespace Keepr.Services
       throw new System.NotImplementedException();
     }
 
-    public VaultKeep Edit(int id, VaultKeep data)
+    public VaultKeep Edit(VaultKeep data)
     {
       throw new System.NotImplementedException();
     }

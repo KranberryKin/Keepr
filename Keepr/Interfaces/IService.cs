@@ -16,12 +16,12 @@ namespace Keepr.Interfaces
     /// Adds the new item to the database and returns it.
     /// </summary>
     /// <returns>Created Object</returns>
-    T Create(int id);
+    T Create(T data);
     /// <summary>
     /// Takes updated 
     /// </summary>
     /// <returns>Edited Object</returns>
-    T Edit(int id, T data);
+    T Edit(T data);
     /// <summary>
     /// Finds item by it's Id and removes it form the database.
     /// </summary>

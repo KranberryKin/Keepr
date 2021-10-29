@@ -14,9 +14,20 @@ namespace Keepr.Services
       _kr = kr;
     }
 
-    public Keep Create(int id)
+    public Keep Create(Keep keepdata)
     {
-      throw new System.NotImplementedException();
+      return _kr.Create(keepdata);
+    }
+
+
+    public void Delete(int id, string userId)
+    {
+      var foundKeep = Get(id);
+      if (foundKeep.CreatorId != userId)
+      {
+        throw new System.Exception("Can't Remove this Keep!");
+      }
+      _kr.Delete(id);
     }
 
     public void Delete(int id)
@@ -24,9 +35,13 @@ namespace Keepr.Services
       throw new System.NotImplementedException();
     }
 
-    public Keep Edit(int id, Keep data)
+    public Keep Edit(Keep data)
     {
-      throw new System.NotImplementedException();
+      Keep foundKeep = Get(data.Id);
+      foundKeep.Name = data.Name ?? foundKeep.Name;
+      foundKeep.Description = data.Description ?? foundKeep.Description;
+      foundKeep.Img = data.Img ?? foundKeep.Img;
+      return _kr.Edit(foundKeep);
     }
 
     public List<Keep> Get()
@@ -34,9 +49,9 @@ namespace Keepr.Services
       return _kr.Get();
     }
 
-    public Keep Get(int id)
+    public Keep Get(int keepId)
     {
-      throw new System.NotImplementedException();
+      return _kr.Get(keepId);
     }
   }
 }

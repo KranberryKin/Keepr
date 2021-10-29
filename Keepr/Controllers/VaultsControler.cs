@@ -5,8 +5,8 @@ using System.Collections.Generic;
 
 namespace Keepr.Controllers
 {
-  public partial class AccountController
-  {
+    [ApiController]
+    [Route("api/[controller]")]
     public class VaultsControler : ControllerBase
         {
             [HttpGet]
@@ -21,7 +21,4 @@ namespace Keepr.Controllers
                 }
             }
         }
-    }
-
-
 }
