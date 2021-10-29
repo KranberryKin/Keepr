@@ -4,7 +4,7 @@ using Dapper;
 
 namespace Keepr.Repositories
 {
-    public class AccountsRepository
+  public class AccountsRepository
     {
         private readonly IDbConnection _db;
 

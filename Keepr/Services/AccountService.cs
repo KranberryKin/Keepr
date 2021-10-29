@@ -3,7 +3,7 @@ using Keepr.Repositories;
 
 namespace Keepr.Services
 {
-    public class AccountService
+  public class AccountService
     {
         private readonly AccountsRepository _repo;
         public AccountService(AccountsRepository repo)

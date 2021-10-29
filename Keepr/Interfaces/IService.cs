@@ -4,13 +4,13 @@ namespace Keepr.Interfaces
 {
   public interface IService<T>
   {
-        /// <summary>
+    /// <summary>
     /// Gets all items of a table, returns a list.
     /// </summary>
     List<T> Get();
-/// <summary>
-/// Returns a single items, find it by it's Id.
-/// </summary>
+    /// <summary>
+    /// Returns a single items, find it by it's Id.
+    /// </summary>
     T Get(int id);
     /// <summary>
     /// Adds the new item to the database and returns it.
