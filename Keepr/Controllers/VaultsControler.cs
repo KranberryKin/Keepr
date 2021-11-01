@@ -39,6 +39,28 @@ namespace Keepr.Controllers
             try
             {
                  var vault = _vs.Get(vaultId);
+                 if (vault == null)
+                 {
+                     return BadRequest("can't find vault");
+                 }
+                 return Ok(vault);
+            }
+            catch (System.Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        [HttpGet("{vaultId}/keeps")]
+        public ActionResult<Vault> GetVaultKeeps(int vaultId)
+        {
+            try
+            {
+                 var vault = _vs.GetVaultKeeps(vaultId);
+                 if (vault == null)
+                 {
+                     return BadRequest("can't find vault");
+                 }
                  return Ok(vault);
             }
             catch (System.Exception e)

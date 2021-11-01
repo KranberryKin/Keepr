@@ -39,6 +39,10 @@ namespace Keepr.Controllers
               try
               {
                    var keep = _ks.Get(keepId);
+                   if (keep == null)
+                   {
+                     return BadRequest("Can't find keep");
+                   }
                    return Ok(keep);
               }
               catch (System.Exception e)
@@ -85,6 +89,7 @@ namespace Keepr.Controllers
               try
               {
                   Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+                    Get(keepId);
                    _ks.Delete(keepId, userInfo.Id);
                    return Ok("Keep Deleted");
               }

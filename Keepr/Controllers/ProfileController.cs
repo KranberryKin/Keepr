@@ -1,23 +1,31 @@
 using System;
 using Keepr.Models;
+using Keepr.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Keepr.Controllers
 {
-    [ApiController]
-    [Route("api/[controller]")]
-    public class ProfileController : ControllerBase
+[ApiController]
+[Route("api/[controller]")]
+public class ProfileController : ControllerBase
+    {
+    private readonly ProfilesService _ps;
+
+    public ProfileController(ProfilesService ps)
+    {
+      _ps = ps;
+    }
+
+    [HttpGet]
+    public ActionResult<Profile> Get(){
+        try
         {
-            [HttpGet]
-            public ActionResult<Profile> Get(){
-                try
-                {
-                     return Ok();
-                }
-                catch (System.Exception e)
-                {
-                    throw new Exception(e.Message);
-                }
-            }
+             return Ok();
         }
+        catch (System.Exception e)
+        {
+            throw new Exception(e.Message);
+        }
+    }
+    }
 }

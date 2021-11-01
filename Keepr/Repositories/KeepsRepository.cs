@@ -25,7 +25,8 @@ namespace Keepr.Repositories
       ";
       var id = _db.ExecuteScalar<int>(sql, keepdata);
       keepdata.Id = id;
-      return keepdata;
+      var foundKeep = Get(keepdata.Id);
+      return foundKeep;
     }
 
 
