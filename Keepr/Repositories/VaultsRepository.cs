@@ -59,6 +59,7 @@ namespace Keepr.Repositories
 
     internal List<Keep> GetVaultKeeps(int vaultId)
     {
+      throw new System.NotImplementedException();
     }
 
     public List<Vault> Get()
