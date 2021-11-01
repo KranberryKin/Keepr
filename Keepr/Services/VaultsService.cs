@@ -50,12 +50,12 @@ namespace Keepr.Services
 
     public Vault Get(int id)
     {
-      var vault = _vr.Get(id);
-      if (vault == null)
-      {
-        throw new System.Exception("Can't Find Vault");
-      }
-      return vault;
+      return _vr.Get(id);
+    }
+
+    internal List<Keep> GetVaultKeeps(int vaultId)
+    {
+      return _vr.GetVaultKeeps(vaultId);
     }
   }
 }

@@ -25,7 +25,8 @@ namespace Keepr.Repositories
       ";
       var id = _db.ExecuteScalar<int>(sql, data);
       data.Id = id;
-      return data;
+      var foundVault = Get(data.Id);
+      return foundVault;
     }
 
     public void Delete(int id)
@@ -54,6 +55,10 @@ namespace Keepr.Repositories
         throw new System.Exception("Update Failed");
       }
       return data;
+    }
+
+    internal List<Keep> GetVaultKeeps(int vaultId)
+    {
     }
 
     public List<Vault> Get()
