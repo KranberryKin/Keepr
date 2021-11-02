@@ -57,9 +57,22 @@ namespace Keepr.Repositories
       return data;
     }
 
-    internal List<Keep> GetVaultKeeps(int vaultId)
+    internal List<VaultKeepView> GetVaultsKeeps(int vaultId)
     {
-      throw new System.NotImplementedException();
+      string sql = @"
+      SELECT 
+      k.*,
+      vk.id AS VaultKeepId,
+      a.*
+      FROM vaultkeeps vk
+      JOIN keeps k ON k.id = vk.keepId
+      JOIN accounts a ON a.id = k.creatorId
+      WHERE vk.vaultId = @vaultId;
+      ";
+      return _db.Query<VaultKeepView, Profile, VaultKeepView>(sql, (k, a) => {
+        k.Creator = a;
+        return k;
+      }, new {vaultId}, splitOn : "id").ToList();
     }
 
     public List<Vault> Get()

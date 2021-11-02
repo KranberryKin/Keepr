@@ -51,7 +51,12 @@ namespace Keepr.Services
 
     public Keep Get(int keepId)
     {
-      return _kr.Get(keepId);
+      var foundKeep = _kr.Get(keepId);
+       if (foundKeep == null)
+       {
+         throw new System.Exception("Can't find keep");
+       }
+      return foundKeep;
     }
   }
 }

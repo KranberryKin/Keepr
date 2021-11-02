@@ -38,12 +38,7 @@ namespace Keepr.Controllers
             {
               try
               {
-                   var keep = _ks.Get(keepId);
-                   if (keep == null)
-                   {
-                     return BadRequest("Can't find keep");
-                   }
-                   return Ok(keep);
+                   return Ok( _ks.Get(keepId));
               }
               catch (System.Exception e)
               {

@@ -21,6 +21,11 @@ namespace Keepr.Services
 
     public void Delete(int id, string userId)
     {
+      var foundVault = Get(id);
+      if (foundVault.CreatorId != userId)
+      {
+        throw new System.Exception("You can't delete this!");
+      }
       _vr.Delete(id);
     }
 
@@ -45,12 +50,19 @@ namespace Keepr.Services
 
     public Vault Get(int id)
     {
-      return _vr.Get(id);
+      var foundVault = _vr.Get(id);
+      if (foundVault == null)
+      {
+        throw new System.Exception("Can't find Vault");
+      }
+      return foundVault;
     }
 
-    internal List<Keep> GetVaultKeeps(int vaultId)
+    internal List<VaultKeepView> GetVaultsKeeps(int vaultId)
     {
-      return _vr.GetVaultKeeps(vaultId);
+      var foundVault = Get(vaultId);
+      var vault = _vr.GetVaultsKeeps(foundVault.Id);
+      return vault;
     }
   }
 }

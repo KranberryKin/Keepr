@@ -48,3 +48,5 @@ CREATE TABLE IF NOT EXISTS vaultkeeps(
       FROM vaults v
       JOIN accounts a ON a.id = v.creatorId
       WHERE v.id = 3 AND v.isPrivate = 1;
+
+      SELECT * FROM vaultkeeps

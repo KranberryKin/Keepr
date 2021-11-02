@@ -24,8 +24,7 @@ namespace Keepr.Controllers
         {
             try
             {
-                 var vaults = _vs.Get();
-                 return Ok(vaults);
+                 return Ok( _vs.Get());
             }
             catch (System.Exception e)
             {
@@ -38,12 +37,7 @@ namespace Keepr.Controllers
         {
             try
             {
-                 var vault = _vs.Get(vaultId);
-                 if (vault == null)
-                 {
-                     return BadRequest("Can't find vault");
-                 }
-                 return Ok(vault);
+                 return Ok(_vs.Get(vaultId));
             }
             catch (System.Exception e)
             {
@@ -52,16 +46,11 @@ namespace Keepr.Controllers
         }
 
         [HttpGet("{vaultId}/keeps")]
-        public ActionResult<Vault> GetVaultKeeps(int vaultId)
+        public ActionResult<List<VaultKeepView>> GetVaultKeeps(int vaultId)
         {
             try
             {
-                 var vault = _vs.GetVaultKeeps(vaultId);
-                 if (vault == null)
-                 {
-                     return BadRequest("can't find vault");
-                 }
-                 return Ok(vault);
+                 return Ok(_vs.GetVaultsKeeps(vaultId));
             }
             catch (System.Exception e)
             {
@@ -107,11 +96,6 @@ namespace Keepr.Controllers
             try
             {
                   Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-                  Vault foundVault = _vs.Get(vaultId);
-                  if (foundVault.CreatorId != userInfo.Id)
-                  {
-                      return BadRequest("Can't find Vault");
-                  }
                 _vs.Delete(vaultId, userInfo.Id);
                  return Ok("Vault Deleted!");
             }
