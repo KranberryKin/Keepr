@@ -41,7 +41,7 @@ namespace Keepr.Controllers
                  var vault = _vs.Get(vaultId);
                  if (vault == null)
                  {
-                     return BadRequest("can't find vault");
+                     return BadRequest("Can't find vault");
                  }
                  return Ok(vault);
             }
@@ -107,6 +107,11 @@ namespace Keepr.Controllers
             try
             {
                   Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+                  var foundVault = Get(vaultId);
+                  if (foundVault.Value.CreatorId != userInfo.Id)
+                  {
+                      return BadRequest("Can't find Vault");
+                  }
                 _vs.Delete(vaultId, userInfo.Id);
                  return Ok("Vault Deleted!");
             }

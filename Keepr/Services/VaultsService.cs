@@ -21,11 +21,6 @@ namespace Keepr.Services
 
     public void Delete(int id, string userId)
     {
-      var foundVault = Get(id);
-      if (foundVault.CreatorId != userId)
-      {
-        throw new System.Exception("You Can't Delete This!");
-      }
       _vr.Delete(id);
     }
 

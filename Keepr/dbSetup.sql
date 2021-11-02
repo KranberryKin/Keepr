@@ -35,3 +35,16 @@ CREATE TABLE IF NOT EXISTS vaultkeeps(
   keepId int COMMENT 'Keep Id',
   creatorId varchar(255) COMMENT 'Creator Id'
 ) default charset utf8 COMMENT '';
+
+  SELECT 
+      v.*,
+      a.*
+      FROM vaults v
+      JOIN accounts a ON a.id = v.creatorId
+      WHERE v.isPrivate = 0;
+      SELECT
+      v.*,
+      a.*
+      FROM vaults v
+      JOIN accounts a ON a.id = v.creatorId
+      WHERE v.id = 3 AND v.isPrivate = 1;
