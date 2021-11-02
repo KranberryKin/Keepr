@@ -107,8 +107,8 @@ namespace Keepr.Controllers
             try
             {
                   Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-                  var foundVault = Get(vaultId);
-                  if (foundVault.Value.CreatorId != userInfo.Id)
+                  Vault foundVault = _vs.Get(vaultId);
+                  if (foundVault.CreatorId != userInfo.Id)
                   {
                       return BadRequest("Can't find Vault");
                   }
