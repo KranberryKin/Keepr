@@ -1,11 +1,10 @@
-using System;
 using Keepr.Models;
 using Keepr.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Keepr.Controllers
 {
-[ApiController]
+  [ApiController]
 [Route("api/[controller]")]
 public class ProfileController : ControllerBase
     {
@@ -24,7 +23,7 @@ public class ProfileController : ControllerBase
         }
         catch (System.Exception e)
         {
-            throw new Exception(e.Message);
+            return BadRequest(e.Message);
         }
     }
     }

@@ -29,7 +29,7 @@ namespace Keepr.Controllers
                 }
                 catch (System.Exception e)
                 {
-                    throw new Exception(e.Message);
+                    return BadRequest(e.Message);
                 }
             }
 
@@ -47,7 +47,7 @@ namespace Keepr.Controllers
               }
               catch (System.Exception e)
               {
-                  throw new Exception(e.Message);
+                  return BadRequest(e.Message);
               }
             }
 
@@ -63,7 +63,7 @@ namespace Keepr.Controllers
               }
               catch (System.Exception e)
               {
-                  throw new Exception(e.Message);
+                  return BadRequest(e.Message);
               }
             }
 
@@ -79,7 +79,7 @@ namespace Keepr.Controllers
               }
               catch (System.Exception e)
               {
-                  throw new Exception(e.Message);
+                  return BadRequest(e.Message);
               }
             }
 
@@ -95,7 +95,7 @@ namespace Keepr.Controllers
               }
               catch (System.Exception e)
               {
-                  throw new Exception(e.Message);
+                  return BadRequest(e.Message);
               }
             }
     }
