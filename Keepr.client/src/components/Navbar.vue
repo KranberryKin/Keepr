@@ -28,6 +28,11 @@
             About
           </router-link>
         </li>
+        <li>
+          <router-link :to="{name: 'Profile'}" class="btn text-success lighten-30 selectable text-uppercase">
+            Profile
+          </router-link>
+        </li>
       </ul>
       <span class="navbar-text">
         <button
