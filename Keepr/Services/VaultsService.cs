@@ -64,6 +64,10 @@ namespace Keepr.Services
       {
         throw new System.Exception("You can't do that");
       }
+      if (foundVault == null)
+      {
+        throw new System.Exception("Can't find Vault");
+      }
       return foundVault;
     }
 
