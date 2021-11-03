@@ -1,31 +1,27 @@
 <template>
-  <div class="home">
-
+  <div class="home row d-flex">
+    <Keep v-for="k in keeps" :key="k.id" :keep="k"/>
   </div>
 </template>
 
 <script>
+import { computed, onMounted } from "@vue/runtime-core"
+import { keepsService } from "../services/KeepsService"
+import { AppState } from "../AppState"
 export default {
-  name: 'Home'
+  name: 'Home',
+  setup(){
+    onMounted( async () => {
+      await keepsService.GetKeeps()
+    })
+    const keeps = computed(() => AppState.keeps)
+    return{
+      keeps
+    }
+  }
 }
 </script>
 
 <style scoped lang="scss">
-.home{
-  display: grid;
-  height: 80vh;
-  place-content: center;
-  text-align: center;
-  user-select: none;
-  .home-card{
-    width: 50vw;
-    > img{
-      height: 200px;
-      max-width: 200px;
-      width: 100%;
-      object-fit: contain;
-      object-position: center;
-    }
-  }
-}
+
 </style>
