@@ -1,4 +1,5 @@
 import { AppState } from "../AppState"
+import { KeepModel } from "../models/KeepModel"
 import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
 
@@ -12,7 +13,24 @@ async GetKeeps(){
 async GetKeepById(keepId){
   const res = await api.get('api/keeps/' + keepId)
   logger.log("Get keep by id res", res)
-  AppState.keeps = new KeepModel(res.data)
+  AppState.activeKeep = new KeepModel(res.data)
+}
+async CreateKeep(keepData){
+  const res = await api.post('api/keeps', keepData)
+  logger.log("Create Keep res", res)
+  AppState.keeps = [new KeepModel(res.data), ...AppState.keeps]
+}
+async EditKeep(keepData){
+  const res = await api.put('api/keeps/' + keepData.id, keepData)
+  logger.log("Edit Keep res", res)
+  let keepIndex = AppState.keeps.findIndex(k => k.id === keepData.id)
+  AppState.keeps.splice(keepIndex, 1, new KeepModel(res.data))
+}
+async DeleteKeep(keepId){
+  const res = await api.delete('api/keeps/' + keepId)
+  logger.log("Delete Keep Res", res)
+  let keepIndex = AppState.keeps.findIndex(k => k.id === keepId)
+  AppState.keeps.splice(keepIndex, 1)
 }
 }
 
