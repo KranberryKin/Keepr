@@ -48,9 +48,15 @@ namespace Keepr.Repositories
       return _db.Query<Keep>(sql, new {profileId}).ToList();
     }
 
-    internal List<Vault> GetVaults(string profileId)
+    internal List<Vault> GetValidVaults(string profileId)
     {
       string sql = "SELECT * FROM vaults WHERE creatorId = @profileId;";
+      return _db.Query<Vault>(sql, new {profileId}).ToList();
+    }
+
+    internal List<Vault> GetVaults(string profileId)
+    {
+      string sql = "SELECT * FROM vaults WHERE creatorId = @profileId AND isPrivate = 0;";
       return _db.Query<Vault>(sql, new {profileId}).ToList();
     }
 

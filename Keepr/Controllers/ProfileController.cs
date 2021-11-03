@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Threading.Tasks;
+using CodeWorks.Auth0Provider;
 using Keepr.Models;
 using Keepr.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -39,10 +41,15 @@ public class ProfilesController : ControllerBase
         }
     }
     [HttpGet("{profileId}/vaults")]
-    public ActionResult<List<Vault>> GetVaults(string profileId){
+    public async Task<ActionResult<List<Vault>>> GetVaults(string profileId){
         try
         {
-             return Ok(_ps.GetVaults(profileId));
+             Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+            if (userInfo == null)
+            {
+                return Ok(_ps.GetVaults(profileId));
+            }
+             return Ok(_ps.GetValidVaults(profileId));
         }
         catch (System.Exception e)
         {

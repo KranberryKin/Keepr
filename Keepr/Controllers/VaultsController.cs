@@ -33,11 +33,21 @@ namespace Keepr.Controllers
         }
 
         [HttpGet("{vaultId}")]
-        public ActionResult<Vault> Get(int vaultId)
+        public async Task<ActionResult<Vault>> Get(int vaultId)
         {
             try
             {
-                 return Ok(_vs.Get(vaultId));
+                  Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
+                  if (userInfo == null)
+                  {
+                      return Ok(_vs.Get(vaultId));
+                  }
+                  var vault = _vs.GetValid(vaultId);
+                  if (vault.CreatorId != userInfo.Id)
+                  {
+                      return BadRequest("Can't Do That!");
+                  }
+                 return Ok(vault);
             }
             catch (System.Exception e)
             {

@@ -53,5 +53,9 @@ namespace Keepr.Services
     {
       return _pr.GetVaults(profileId);
     }
+    internal List<Vault> GetValidVaults(string profileId)
+    {
+      return _pr.GetValidVaults(profileId);
+    }
   }
 }

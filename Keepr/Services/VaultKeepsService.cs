@@ -7,16 +7,28 @@ namespace Keepr.Services
 {
   public class VaultKeepsService : IService<VaultKeep>
   {
+    private readonly VaultsService _vs;
     private readonly VaultKeepsRepository _vkr;
 
-    public VaultKeepsService(VaultKeepsRepository vkr)
+    public VaultKeepsService(VaultKeepsRepository vkr, VaultsService vs = null)
     {
       _vkr = vkr;
+      _vs = vs;
+    }
+
+    public VaultKeep Create(VaultKeep data, string userId)
+    {
+      var foundVault = _vs.GetValid(data.VaultId);
+      if (foundVault.CreatorId != userId)
+      {
+        throw new System.Exception("You Can't Do That!");
+      } data.CreatorId = userId;
+      return _vkr.Create(data);
     }
 
     public VaultKeep Create(VaultKeep data)
     {
-      return _vkr.Create(data);
+      throw new System.NotImplementedException();
     }
 
     public void Delete(int id, string userId)

@@ -48,12 +48,21 @@ namespace Keepr.Services
       return _vr.Get();
     }
 
-    public Vault Get(int id)
+    public Vault GetValid(int id)
     {
       var foundVault = _vr.Get(id);
       if (foundVault == null)
       {
         throw new System.Exception("Can't find Vault");
+      }
+      return foundVault;
+    }
+    public Vault Get(int id)
+    {
+      var foundVault = _vr.Get(id);
+      if (foundVault.IsPrivate == true)
+      {
+        throw new System.Exception("You can't do that");
       }
       return foundVault;
     }
