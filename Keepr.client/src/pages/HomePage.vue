@@ -1,5 +1,5 @@
 <template>
-  <div class="home row d-flex">
+  <div class="home row d-flex" data-masonry='{"percentPosition": true }'>
     <Keep v-for="k in keeps" :key="k.id" :keep="k"/>
   </div>
 </template>
