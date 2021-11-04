@@ -14,7 +14,7 @@
       <h1 class="ps-5">Vaults</h1>
        
     </div>
-    <div class="row mt-3"[0[]] data-masonry='{"percentPosition": true }'>
+    <div class="row mt-3" data-masonry='{"percentPosition": true }'>
       <h1 class="ps-5">Keeps</h1>
       <Keep v-for="k in keeps" :key="k.id" :keep="k" />
     </div>
