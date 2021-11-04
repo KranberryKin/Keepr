@@ -1,4 +1,5 @@
 import { AppState } from "../AppState"
+import { KeepModel } from "../models/KeepModel"
 import { VaultModel } from "../models/VaultModel"
 import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
@@ -32,6 +33,12 @@ async DeleteVault(vaultId){
   logger.log("Delete vault res", res)
   let vaultIndex = AppState.vaults.findIndex(v => v.id === vaultId)
   AppState.vaults.splice(vaultIndex, 1)
+}
+async GetVaultKeeps(vaultId){
+  AppState.keeps = []
+  const res = await api.get(`api/vaults/${vaultId}/keeps`)
+  logger.log("Get vaul keeps res", res)
+  AppState.keeps = res.data.map(vk => new KeepModel(vk))
 }
 }
 

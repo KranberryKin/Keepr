@@ -28,11 +28,6 @@
             About
           </router-link>
         </li>
-        <li>
-          <router-link :to="{name: 'Vault'}" class="btn text-success lighten-30 selectable text-uppercase">
-            Vault
-          </router-link>
-        </li>
       </ul>
       <span class="navbar-text">
         <button

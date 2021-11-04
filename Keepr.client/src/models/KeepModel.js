@@ -9,5 +9,6 @@ export class KeepModel{
     this.shares = keepData.shares
     this.keeps = keepData.keeps
     this.creator = keepData.creator
+    this.vaultKeepId = keepData.vaultKeepId
   }
 }

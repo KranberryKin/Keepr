@@ -1,14 +1,43 @@
 <template>
   <div class="Vault">
-  <h6>Hello from the VaultPage</h6>
+    <div class="row mt-4">
+      <div class="col-6 ps-5">
+        <h4>{{ activeVault.name }}</h4>
+        <h6>Keeps : {{ keepsCount }}</h6>
+      </div>
+      <div class="col-6 text-end pe-5" :class="activeVault.creatorId === user.id ? '':'visually-hidden'">
+        <button class="btn btn-outline-danger">Delete Vault</button>
+      </div>
+    </div>
+      <h4 class="ps-5">Vault Keeps</h4>
+    <div class="row" v-if="keeps.length != 0">
+      <Keep v-for="k in keeps" :key="k.id" :keep="k" />
+    </div>
+    <div class="row ps-5" v-else>
+      <h6>No Keeps Yet...</h6>
+    </div>
   </div>
 </template>
 
 
 <script>
+import { computed, onBeforeMount } from "@vue/runtime-core"
+import { useRoute } from "vue-router"
+import { vaultsService } from "../services/VaultsService"
+import { AppState } from "../AppState"
 export default {
   setup(){
-    return {}
+    const route = useRoute()
+    onBeforeMount(async () => {
+      await vaultsService.GetVaultById(route.params.vaultId)
+      await vaultsService.GetVaultKeeps(route.params.vaultId)
+    })
+    return {
+      activeVault: computed(() => AppState.activeVault),
+      keeps: computed(() => AppState.keeps),
+      keepsCount: computed(() => AppState.keeps.length),
+      user: computed(() => AppState.account)
+    }
   }
 }
 </script>

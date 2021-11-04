@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS keeps(
   shares int NOT NULL DEFAULT 0,
   keeps int NOT NULL DEFAULT 0
 ) default charset utf8 COMMENT '';
+DROP TABLE keeps;
 CREATE TABLE IF NOT EXISTS vaults(
   id int NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key',
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
@@ -27,6 +28,7 @@ CREATE TABLE IF NOT EXISTS vaults(
   creatorId varchar(255) COMMENT 'Creator Id',
   isPrivate TINYINT NOT NULL DEFAULT 0
 ) default charset utf8 COMMENT '';
+DROP TABLE vaults;
 CREATE TABLE IF NOT EXISTS vaultkeeps(
   id int NOT NULL PRIMARY KEY AUTO_INCREMENT COMMENT 'primary key',
   createdAt DATETIME DEFAULT CURRENT_TIMESTAMP COMMENT 'Time Created',
@@ -35,6 +37,7 @@ CREATE TABLE IF NOT EXISTS vaultkeeps(
   keepId int COMMENT 'Keep Id',
   creatorId varchar(255) COMMENT 'Creator Id'
 ) default charset utf8 COMMENT '';
+DROP TABLE vaultkeeps;
 
   SELECT 
       v.*,
