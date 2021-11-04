@@ -44,8 +44,17 @@ namespace Keepr.Repositories
 
     internal List<Keep> GetKeeps(string profileId)
     {
-      string sql = "SELECT * FROM keeps WHERE creatorId = @profileId;";
-      return _db.Query<Keep>(sql, new {profileId}).ToList();
+      string sql = @"
+      SELECT
+      k.*,
+      a.* 
+      FROM keeps k
+      JOIN accounts a ON a.id = k.creatorId
+      WHERE k.creatorId = @profileId;";
+      return _db.Query<Keep, Profile, Keep>(sql,(k, a) => {
+        k.Creator =a;
+        return k;
+      }, new {profileId}).ToList();
     }
 
     internal List<Vault> GetValidVaults(string profileId)

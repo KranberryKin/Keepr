@@ -1,12 +1,63 @@
 <template>
-  <div class="Keep col-3">
-    <h6>Hello from Keep</h6>
+<div class="Keep col-3 mt-2" :style="[{'background' : keepImg}]">
+  <div :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal">
+    <h6 class="text-center">Hello from Keep<br>{{keep.name}}</h6>
   </div>
+  <Model :id="'keep-modal-' + keep.id">
+    <template #modal-body>
+      <div class="row">
+        <div class="col-12">
+          <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
+          <div class="row">
+            <div class="col-6 Keep">
+
+            </div>
+            <div class="col-6 text-center">
+              <div class="row justify-content-center">
+                <div class="col-3 d-flex flex-row align-items-center">
+                  <i class="mdi mdi-eye mdi-24px px-1"></i>{{keep.views}}
+                </div>
+                <div class="col-3 d-flex flex-row align-items-center">
+                  <i class="mdi mdi-alpha-k-box-outline mdi-24px pt-0 px-1"></i>{{keep.keeps}}
+                </div>
+                <div class="col-3 d-flex flex-row align-items-center">
+                  <i class="mdi mdi-share-variant mdi-24px pt-0 px-1"></i>{{keep.shares}}
+                </div>
+              </div>
+              <div class="row text-center">
+                <h4 class="pt-2">{{keep.name}}</h4>
+              </div>
+              <div class="row text-center">
+                <div class="border-bottom py-3">{{keep.description}}</div>
+              </div>
+              <div class="row mt-2 align-items-center">
+                  <div class="col-4">
+                    <button class="btn btn-outline-info" type="dropdown">Vaults</button>
+                  </div>
+                  <div class="col-3">
+                    <i class="mdi mdi-trash-can mdi-36px action"></i>
+                  </div>
+                  <div class="col-5 d-flex flex-row">
+                    <router-link :to="{name:'Profile', params:{profileId : keep.creatorId}}" >
+                      <img :src="keep.creator.picture" class="rounded icon mx-1 action" alt="" :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal">
+                    </router-link>
+                    <p class="break">{{keep.creator.name}}</p>
+                  </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </template>
+  </Model>
+</div>
 </template>
 
 
 <script>
+import { computed } from "@vue/reactivity"
 import { KeepModel } from "../models/KeepModel"
+import { AppState } from "../AppState"
 export default {
   props:{
     keep:{
@@ -15,12 +66,28 @@ export default {
     }
   },
   setup(props){
-    return {}
+    const keepImg = computed(() => `url(${props.keep.img})`)
+    return {
+      keepImg
+    }
   }
 }
 </script>
 
 
 <style lang="scss" scoped>
-
+// .Keep{
+//   background-image: v-bind(keepImg);
+//   background-size: cover;
+//   background-repeat: no-repeat;
+// }
+.close{
+  float: right;
+}
+.icon{
+  height: 36px;
+}
+.break{
+  word-break: break-all;
+}
 </style>

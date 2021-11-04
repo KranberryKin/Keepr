@@ -1,6 +1,6 @@
 <template>
   <div class="Vault">
-
+  <h6>Hello from the VaultPage</h6>
   </div>
 </template>
 

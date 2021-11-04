@@ -45,7 +45,7 @@ public class ProfilesController : ControllerBase
         try
         {
              Account userInfo = await HttpContext.GetUserInfoAsync<Account>();
-            if (userInfo == null)
+            if (userInfo == null || userInfo.Id != profileId)
             {
                 return Ok(_ps.GetVaults(profileId));
             }
