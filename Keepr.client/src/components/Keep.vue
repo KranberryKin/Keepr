@@ -40,7 +40,7 @@
                     </select>
                   </div>
                   <div class="col-3">
-                    <i class="mdi mdi-trash-can mdi-36px action" :class="keep.creatorId === user.id ? '':'visually-hidden'" @click="DeleteKeep(keep.id)"></i>
+                    <i class="mdi mdi-trash-can mdi-36px action"  :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal"  :class="keep.creatorId === user.id ? '':'visually-hidden'" @click="DeleteKeep(keep.id)"></i>
                   </div>
                   <div class="col-5 d-flex flex-row">
                     <router-link :to="{name:'Profile', params:{profileId : keep.creatorId}}" >
@@ -65,6 +65,7 @@ import { KeepModel } from "../models/KeepModel"
 import { AppState } from "../AppState"
 import { vaultKeepsService } from "../services/VaultKeepsService"
 import Pop from "../utils/Pop"
+import { keepsService } from "../services/KeepsService"
 export default {
   props:{
     keep:{
@@ -84,8 +85,10 @@ export default {
       keepImg,
       user: computed(() => AppState.account),
       vaults: computed(() => AppState.vaults),
-      DeleteKeep(keepId){
-
+       async DeleteKeep(keepId){
+         if (await Pop.confirm()){
+           keepsService.DeleteKeep(keepId)
+         }
       },
       addVaultKeep(e, keepId){
         if(Pop.confirm){
