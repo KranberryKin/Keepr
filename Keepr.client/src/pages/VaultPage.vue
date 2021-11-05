@@ -11,7 +11,7 @@
     </div>
       <h4 class="ps-5">Vault Keeps</h4>
     <div class="row" v-if="keeps.length != 0">
-      <Keep v-for="k in keeps" :key="k.id" :keep="k" />
+      <VaultKeep v-for="k in keeps" :key="k.id" :keep="k" />
     </div>
     <div class="row ps-5" v-else>
       <h6>No Keeps Yet...</h6>

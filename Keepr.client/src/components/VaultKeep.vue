@@ -1,7 +1,7 @@
 <template>
-<div class="Keep col-3 mt-2">
+<div class="col-3 mt-2">
   <div :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal">
-    <!-- <img :src="keep.img" alt=""> -->
+    <img :src="keep.img" class="img-fluid keepImg" alt="">
     <h6 class="text-center">Hello from Keep<br>{{keep.name}}</h6>
   </div>
   <Model :id="'keep-modal-' + keep.id">
@@ -11,7 +11,7 @@
           <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
           <div class="row">
             <div class="col-6">
-              <img :src="keep.img" class="img-fluid" alt="">
+              <img :src="keep.img" class="img-fluid rounded" alt="">
             </div>
             <div class="col-6 text-center">
               <div class="row justify-content-center">
@@ -95,5 +95,9 @@ export default {
 }
 .break{
   word-break: break-all;
+}
+.keepImg{
+  height: 100%;
+  border-radius: 10%;
 }
 </style>

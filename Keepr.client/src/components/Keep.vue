@@ -1,8 +1,9 @@
 <template>
-<div class="col-3 mt-2">
-  <div :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal">
+<div class="col-lg-3 col-md-4 col-sm-5 mt-2 item">
+  <div :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal" class="keepContainer">
     <img :src="keep.img" class="img-fluid keepImg" alt="">
-    <h6 class="text-center">Hello from Keep<br>{{keep.name}}</h6>
+    <div class="bottom-left">{{keep.name}}</div>
+    <div class="bottom-right"><img :src="keep.creator.picture" class="icon rounded" alt=""></div>
   </div>
   <Model :id="'keep-modal-' + keep.id">
     <template #modal-body>
@@ -11,7 +12,7 @@
           <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
           <div class="row">
             <div class="col-6">
-              <img :src="keep.img" class="img-fluid" alt="">
+              <img :src="keep.img" class="img-fluid rounded" alt="">
             </div>
             <div class="col-6 text-center">
               <div class="row justify-content-center">
@@ -33,7 +34,10 @@
               </div>
               <div class="row mt-2 align-items-center">
                   <div class="col-4">
-                    <button class="btn btn-outline-info" type="dropdown">Vaults</button>
+                    <select name="pets" class="selectWidth" id="pet-select">
+                        <option value="">--Select a Vault--</option>
+                        <option v-for="v in vaults"  :key="v.id" :vault="v" :value="v.id">{{v.name}}</option>
+                    </select>
                   </div>
                   <div class="col-3">
                     <i class="mdi mdi-trash-can mdi-36px action" :class="keep.creatorId === user.id ? '':'visually-hidden'" @click="DeleteKeep(keep.id)"></i>
@@ -68,12 +72,36 @@ export default {
   },
   setup(props){
     const keepImg = computed(() => `url(${props.keep.img})`)
+    // onMounted(() => {
+    //   window.addEventListener('resize', this.resizeAllGridItems);
+    // })
+    // onUnmounted(() => {
+    //   window.removeEventListener('resize', this.resizeAllGridItems);
+    // })
     return {
       keepImg,
       user: computed(() => AppState.account),
+      vaults: computed(() => AppState.vaults),
       DeleteKeep(keepId){
 
-      }
+      },
+      // resizeGridItem(item){
+      //   var grid = document.getElementsByClassName("grid")[0];
+      //   var rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
+      //   var rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'));
+      //   var rowSpan = Math.ceil((item.querySelector('.content').getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
+      //     item.style.gridRowEnd = "span "+rowSpan;
+      // },
+      //  resizeAllGridItems(){
+      //   var allItems = document.getElementsByClassName("item");
+      //   for(x=0;x<allItems.length;x++){
+      //     resizeGridItem(allItems[x]);
+      //   }
+      // },
+      //  resizeInstance(instance){
+      //   var item = instance.elements[0];
+      //   resizeGridItem(item);
+      // }
     }
   }
 }
@@ -100,4 +128,23 @@ export default {
   height: 100%;
   border-radius: 10%;
 }
+.keepContainer{
+  position: relative;
+    text-align: center;
+  color: white;
+}
+.bottom-left {
+  position: absolute;
+  bottom: 8px;
+  left: 16px;
+}
+.bottom-right {
+  position: absolute;
+  bottom: 8px;
+  right: 16px;
+}
+.selectWidth{
+  max-width: 100%;
+}
+
 </style>

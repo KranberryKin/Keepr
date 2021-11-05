@@ -8,6 +8,7 @@ import { api } from "./AxiosService"
 class ProfilesService{
 async GetVaultsByProfileId(profileId){
   AppState.vaults = []
+  logger.log("Profile Id ", profileId)
   const res = await api.get(`api/profiles/${profileId}/vaults`)
   logger.log('Vaults by profileId res', res.data)
 AppState.vaults = res.data.map(v => new VaultModel(v))
