@@ -1,7 +1,7 @@
 <template>
-<div class="col-3 mt-2">
+<div class="Keep col-3 mt-2">
   <div :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal">
-    <img :src="keep.img" class="img-fluid keepImg" alt="">
+    <!-- <img :src="keep.img" alt=""> -->
     <h6 class="text-center">Hello from Keep<br>{{keep.name}}</h6>
   </div>
   <Model :id="'keep-modal-' + keep.id">
@@ -36,7 +36,7 @@
                     <button class="btn btn-outline-info" type="dropdown">Vaults</button>
                   </div>
                   <div class="col-3">
-                    <i class="mdi mdi-trash-can mdi-36px action" :class="keep.creatorId === user.id ? '':'visually-hidden'" @click="DeleteKeep(keep.id)"></i>
+                    <i class="mdi mdi-trash-can mdi-36px action" :class="keep.creatorId === user.id ? '':'visually-hidden'" @click="DeleteKeep(keep.vaultKeepId)"></i>
                   </div>
                   <div class="col-5 d-flex flex-row">
                     <router-link :to="{name:'Profile', params:{profileId : keep.creatorId}}" >
@@ -72,7 +72,7 @@ export default {
       keepImg,
       user: computed(() => AppState.account),
       DeleteKeep(keepId){
-
+        
       }
     }
   }
@@ -95,9 +95,5 @@ export default {
 }
 .break{
   word-break: break-all;
-}
-.keepImg{
-  height: 100%;
-  border-radius: 10%;
 }
 </style>

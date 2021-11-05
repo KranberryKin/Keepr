@@ -17,7 +17,7 @@
           <h1 class="ps-5">Vaults</h1>
           </div>
           <div class="col-lg-10 col-8 col-md-9 flex-start" :class="profile.id === user.id ? '':'visually-hidden'">
-          <i class="mdi mdi-plus action"></i>
+          <i class="mdi mdi-plus action" :data-bs-target="'#vault-modal-' + profile.id" data-bs-toggle="modal"></i>
           </div>
         </div>
       </div>
@@ -31,13 +31,23 @@
       <div class="col-lg-2 col-4 col-md-3">
          <h1 class="ps-5">Keeps</h1>
       </div>
-      <div class="col-lg-10 col-8 col-md-9 flex-start" :class="profile.id === user.id ? '':'visually-hidden'">
-        <i class="mdi mdi-plus action"></i>
+      <div class="col-lg-10 col-8 col-md-9 flex-start" :class="profile.id === user.id ? '':'visually-hidden'" >
+        <i class="mdi mdi-plus action"  :data-bs-target="'#keep-modal-' + profile.id" data-bs-toggle="modal"></i>
       </div>
     </div>
     <div class="row mt-3" data-masonry='{"percentPosition": true }'>
       <Keep v-for="k in keeps" :key="k.id" :keep="k" />
     </div>
+    <Model :id="'keep-modal-' + profile.id">
+      <template #modal-body>
+        <KeepForm />
+      </template>
+    </Model>
+    <Model :id="'vault-modal-' + profile.id">
+      <template #modal-body>
+        <VaultForm />
+      </template>
+    </Model>
   </div>
 </template>
 

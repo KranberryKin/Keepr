@@ -6,7 +6,7 @@
         <h6>Keeps : {{ keepsCount }}</h6>
       </div>
       <div class="col-6 text-end pe-5" :class="activeVault.creatorId === user.id ? '':'visually-hidden'">
-        <button class="btn btn-outline-danger">Delete Vault</button>
+        <button class="btn btn-outline-danger" @click="DeleteVault(activeVault.id)">Delete Vault</button>
       </div>
     </div>
       <h4 class="ps-5">Vault Keeps</h4>
@@ -25,10 +25,13 @@ import { computed, onBeforeMount } from "@vue/runtime-core"
 import { useRoute } from "vue-router"
 import { vaultsService } from "../services/VaultsService"
 import { AppState } from "../AppState"
+import Pop from "../utils/Pop"
+import { logger } from "../utils/Logger"
 export default {
   setup(){
     const route = useRoute()
     onBeforeMount(async () => {
+      logger.log(route.path)
       await vaultsService.GetVaultById(route.params.vaultId)
       await vaultsService.GetVaultKeeps(route.params.vaultId)
     })
@@ -36,7 +39,12 @@ export default {
       activeVault: computed(() => AppState.activeVault),
       keeps: computed(() => AppState.keeps),
       keepsCount: computed(() => AppState.keeps.length),
-      user: computed(() => AppState.account)
+      user: computed(() => AppState.account),
+      DeleteVault(vaultId){
+        if (Pop.confirm()){
+          vaultsService.DeleteVault(vaultId)
+        }
+      }
     }
   }
 }
