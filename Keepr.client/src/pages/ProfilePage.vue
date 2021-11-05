@@ -1,10 +1,10 @@
 <template>
   <div class="Profile">
     <div class="row">
-      <div class="col-4 col-lg-2 mt-4 ps-54 col-md-3">
+      <div class="col-6 col-lg-2 mt-4 ps-54 col-md-3">
         <img :src="profile.picture" alt="" class="profImg">
       </div>
-      <div class="col-8 col-lg-10 mt-4 col-md-9">
+      <div class="col-6 col-lg-10 mt-4 col-md-9">
         <div class="row"><h1>{{profile.name}}</h1></div>
         <div class="row"><h6>Vaults: {{vaultCount}}</h6></div>
         <div class="row"><h6>Keeps: {{keepsCount}}</h6></div>
