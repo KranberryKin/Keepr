@@ -6,14 +6,14 @@
       <input type="text" name="name" v-model="keep.name" required>
     </div>
     <div class="form-group">
-      <label for="description">Description :</label><br>
-      <input type="text" name="description" v-model="keep.description" required>
-    </div>
-    <div class="form-group">
       <label for="img">Image Url :</label><br>
       <input type="text" name="img" v-model="keep.img" required>
     </div>
-<button class="btn btn-outline-success mt-3" type="submit">Create Keep</button>
+    <div class="form-group">
+      <label for="description">Description :</label><br>
+      <textarea  name="description" v-model="keep.description" required/>
+    </div>
+<button class="btn btn-outline-success mt-3" type="submit"  :data-bs-target="'#keep-modal-' + profile.id" data-bs-toggle="modal">Create Keep</button>
   </form>
 </template>
 
@@ -27,9 +27,9 @@ export default {
     const keep = ref({})
     return {
       keep,
-      user: computed(() => AppState.account),
+      profile: computed(() => AppState.account),
       CreateKeep(){
-        keep.value.creatorId = user.id
+        keep.value.creatorId = AppState.account.id
         keepsService.CreateKeep(keep.value)
       }
     }

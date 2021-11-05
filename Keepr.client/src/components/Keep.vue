@@ -1,9 +1,9 @@
 <template>
-<div class="col-lg-3 col-md-4 col-sm-5 mt-2 item">
+<div class="col-lg-3 col-md-4 col-sm-5 mt-2 ">
   <div :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal" class="keepContainer">
-    <img :src="keep.img" class="img-fluid keepImg" alt="">
-    <div class="bottom-left">{{keep.name}}</div>
-    <div class="bottom-right"><img :src="keep.creator.picture" class="icon rounded" alt=""></div>
+      <img :src="keep.img" class="img-fluid keepImg" alt="">
+      <div class="bottom-left">{{keep.name}}</div>
+      <div class="bottom-right"><img :src="keep.creator.picture" class="icon rounded" alt=""></div>
   </div>
   <Model :id="'keep-modal-' + keep.id">
     <template #modal-body>
@@ -34,7 +34,7 @@
               </div>
               <div class="row mt-2 align-items-center">
                   <div class="col-4">
-                    <select name="pets" class="selectWidth" id="pet-select">
+                    <select name="vaults" class="selectWidth" id="vault-select" @change="addVaultKeep($event, keep.id)">
                         <option value="">--Select a Vault--</option>
                         <option v-for="v in vaults"  :key="v.id" :vault="v" :value="v.id">{{v.name}}</option>
                     </select>
@@ -63,6 +63,8 @@
 import { computed } from "@vue/reactivity"
 import { KeepModel } from "../models/KeepModel"
 import { AppState } from "../AppState"
+import { vaultKeepsService } from "../services/VaultKeepsService"
+import Pop from "../utils/Pop"
 export default {
   props:{
     keep:{
@@ -85,22 +87,32 @@ export default {
       DeleteKeep(keepId){
 
       },
+      addVaultKeep(e, keepId){
+        if(Pop.confirm){
+          const valueId = e.target.value
+          var data = {
+            vaultId : valueId,
+            keepId : keepId
+          }
+          vaultKeepsService.CreateVaultKeeps(data)
+        }
+      },
       // resizeGridItem(item){
-      //   var grid = document.getElementsByClassName("grid")[0];
-      //   var rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
-      //   var rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'));
-      //   var rowSpan = Math.ceil((item.querySelector('.content').getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
-      //     item.style.gridRowEnd = "span "+rowSpan;
+      //   // var grid = document.getElementsByClassName("grid")[0];
+      //   // var rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
+      //   // var rowGap = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-row-gap'));
+      //   // var rowSpan = Math.ceil((item.querySelector('.content').getBoundingClientRect().height+rowGap)/(rowHeight+rowGap));
+      //   //   item.style.gridRowEnd = "span "+rowSpan;
       // },
       //  resizeAllGridItems(){
       //   var allItems = document.getElementsByClassName("item");
-      //   for(x=0;x<allItems.length;x++){
-      //     resizeGridItem(allItems[x]);
-      //   }
+      //   // for(x=0;x<allItems.length;x++){
+      //   //   resizeGridItem(allItems[x]);
+      //   // }
       // },
       //  resizeInstance(instance){
       //   var item = instance.elements[0];
-      //   resizeGridItem(item);
+      //   // resizeGridItem(item);
       // }
     }
   }

@@ -1,5 +1,5 @@
 <template>
-   <form class="VaultForm text-center" @submit.prevent="CreateVault()">
+   <form class="VaultForm text-center" @submit.prevent="CreateVault(profile.id)">
      <h6>Create a Vault!</h6>
     <div class="form-group">
       <label for="name">Name :</label><br>
@@ -13,7 +13,7 @@
       <label for="isPrivate">Want it Private?</label>
       <input type="checkbox" name="isPrivate" v-model="vault.isPrivate">
     </div>
-    <button class="btn btn-outline-success">Create Vault</button>
+    <button class="btn btn-outline-success" :data-bs-target="'#vault-modal-' + profile.id" data-bs-toggle="modal">Create Vault</button>
   </form>
 </template>
 
@@ -27,9 +27,8 @@ export default {
     const vault = ref({})
     return {
       vault,
-      user: computed(() => AppState.account),
+      profile: computed(() => AppState.account),
       CreateVault(){
-        vault.value.creatorId = user.creatorId
         vaultsService.CreateVault(vault.value)
       }
     }

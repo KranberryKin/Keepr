@@ -38,16 +38,16 @@
     <div class="row mt-3" data-masonry='{"percentPosition": true }'>
       <Keep v-for="k in keeps" :key="k.id" :keep="k" />
     </div>
-    <Model :id="'keep-modal-' + profile.id">
+    <FormModel :id="'keep-modal-' + profile.id">
       <template #modal-body>
         <KeepForm />
       </template>
-    </Model>
-    <Model :id="'vault-modal-' + profile.id">
+    </FormModel>
+    <FormModel :id="'vault-modal-' + profile.id">
       <template #modal-body>
         <VaultForm />
       </template>
-    </Model>
+    </FormModel>
   </div>
 </template>
 

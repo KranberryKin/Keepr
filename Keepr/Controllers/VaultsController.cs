@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using Keepr.Services;
 using System.Threading.Tasks;
 using CodeWorks.Auth0Provider;
+using Microsoft.AspNetCore.Authorization;
 
 namespace Keepr.Controllers
 {
@@ -70,7 +71,7 @@ namespace Keepr.Controllers
                 return BadRequest(e.Message);
             }
         }
-
+        [Authorize]
         [HttpPost]
         public async Task<ActionResult<Vault>> Create([FromBody] Vault vaultData)
         {
@@ -86,6 +87,7 @@ namespace Keepr.Controllers
                 return BadRequest(e.Message);
             }
         }
+        [Authorize]
 
         [HttpPut("{vaultId}")]
         public async Task<ActionResult<Vault>> Edit(int vaultId, [FromBody] Vault vaultData)
@@ -102,6 +104,7 @@ namespace Keepr.Controllers
                 return BadRequest(e.Message);
             }
         }
+        [Authorize]
 
         [HttpDelete("{vaultId}")]
         public async Task<ActionResult<String>> Delete(int vaultId)

@@ -13,8 +13,9 @@ export default {
   name: 'Home',
   setup(){
     onMounted( async () => {
-      await keepsService.GetKeeps()
       await profilesService.GetVaultsByProfileId(AppState.account.id)
+      await keepsService.GetKeeps()
+
     })
     const keeps = computed(() => AppState.keeps)
     return{
@@ -43,4 +44,10 @@ export default {
     }
   }
 }
+// .grid {
+//   display: grid;
+//   grid-gap: 10px;
+//   grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
+//   grid-auto-rows: 20px;
+// }
 </style>
