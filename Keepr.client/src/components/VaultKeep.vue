@@ -2,7 +2,7 @@
 <div class="col-3 mt-2">
   <div :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal">
     <img :src="keep.img" class="img-fluid keepImg" alt="">
-    <h6 class="text-center">Hello from Keep<br>{{keep.name}}</h6>
+    <h6 class="text-center">{{keep.name}}</h6>
   </div>
   <Model :id="'keep-modal-' + keep.id">
     <template #modal-body>

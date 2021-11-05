@@ -47,7 +47,10 @@ namespace Keepr.Repositories
       SET
       name = @Name,
       description = @Description,
-      img = @Img
+      img = @Img,
+      views = @Views,
+      keeps= @Keeps,
+      shares = @Shares
       WHERE id = @Id LIMIT 1;
       ";
       var rowsAffected = _db.Execute(sql, data);

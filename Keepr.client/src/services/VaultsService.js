@@ -1,6 +1,7 @@
 import { AppState } from "../AppState"
 import { KeepModel } from "../models/KeepModel"
 import { VaultModel } from "../models/VaultModel"
+import { router } from "../router"
 import { logger } from "../utils/Logger"
 import { api } from "./AxiosService"
 import { keepsService } from "./KeepsService"

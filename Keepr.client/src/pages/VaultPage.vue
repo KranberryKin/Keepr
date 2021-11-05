@@ -27,13 +27,21 @@ import { vaultsService } from "../services/VaultsService"
 import { AppState } from "../AppState"
 import Pop from "../utils/Pop"
 import { logger } from "../utils/Logger"
+import { router } from "../router"
 export default {
   setup(){
     const route = useRoute()
     onBeforeMount(async () => {
-      logger.log(route.path)
-      await vaultsService.GetVaultById(route.params.vaultId)
-      await vaultsService.GetVaultKeeps(route.params.vaultId)
+      try {
+        await vaultsService.GetVaultById(route.params.vaultId, AppState.account.id)
+        await vaultsService.GetVaultKeeps(route.params.vaultId)
+      } catch (error) {
+        if(error){
+          router.push({name: 'Home'})
+          return new Error('You cant go here!')
+        }
+      }
+      
     })
     return {
       activeVault: computed(() => AppState.activeVault),

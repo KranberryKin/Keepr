@@ -52,4 +52,4 @@ DROP TABLE vaultkeeps;
       JOIN accounts a ON a.id = v.creatorId
       WHERE v.id = 3 AND v.isPrivate = 1;
 
-      SELECT * FROM vaultkeeps
+      SELECT * FROM vaults;

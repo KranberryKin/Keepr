@@ -1,6 +1,6 @@
 <template>
 <div class="col-lg-3 col-md-4 col-sm-5 mt-2 ">
-  <div :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal" class="keepContainer">
+  <div :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal" @click="incrementView(keep.id)" class="keepContainer">
       <img :src="keep.img" class="img-fluid keepImg" alt="">
       <div class="bottom-left">{{keep.name}}</div>
       <div class="bottom-right"><img :src="keep.creator.picture" class="icon rounded" alt=""></div>
@@ -66,6 +66,7 @@ import { AppState } from "../AppState"
 import { vaultKeepsService } from "../services/VaultKeepsService"
 import Pop from "../utils/Pop"
 import { keepsService } from "../services/KeepsService"
+import { logger } from "../utils/Logger"
 export default {
   props:{
     keep:{
@@ -90,16 +91,27 @@ export default {
            keepsService.DeleteKeep(keepId)
          }
       },
-      addVaultKeep(e, keepId){
-        if(Pop.confirm){
+      async addVaultKeep(e, keepId){
+        if(await Pop.confirm){
           const valueId = e.target.value
           var data = {
             vaultId : valueId,
             keepId : keepId
           }
-          vaultKeepsService.CreateVaultKeeps(data)
+          await vaultKeepsService.CreateVaultKeeps(data)
+          await keepsService.GetKeepById(keepId)
+          AppState.activeKeep.keeps = AppState.activeKeep.keeps + 1
+          const keepIndex = AppState.keeps.findIndex(k => k.id === keepId)
+          AppState.keeps.splice(keepIndex, 1, AppState.activeKeep)
         }
       },
+        async incrementView(keepId){
+          await keepsService.GetKeepById(keepId)
+          AppState.activeKeep.views = AppState.activeKeep.views + 1
+          await keepsService.EditKeep(AppState.activeKeep) 
+          const keepIndex = AppState.keeps.findIndex(k => k.id === keepId)
+          AppState.keeps.splice(keepIndex, 1, AppState.activeKeep)
+        }
       // resizeGridItem(item){
       //   // var grid = document.getElementsByClassName("grid")[0];
       //   // var rowHeight = parseInt(window.getComputedStyle(grid).getPropertyValue('grid-auto-rows'));
