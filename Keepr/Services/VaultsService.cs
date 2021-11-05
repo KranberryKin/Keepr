@@ -57,6 +57,7 @@ namespace Keepr.Services
       }
       return foundVault;
     }
+    // FIXME getting personal private vault works
     public Vault Get(int id)
     {
       var foundVault = _vr.Get(id);

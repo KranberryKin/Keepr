@@ -32,7 +32,7 @@ namespace Keepr.Controllers
                 return BadRequest(e.Message);
             }
         }
-
+        
         [HttpGet("{vaultId}")]
         public async Task<ActionResult<Vault>> Get(int vaultId)
         {

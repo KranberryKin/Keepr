@@ -1,7 +1,7 @@
 <template>
-<div class="col-lg-3 col-md-4 col-sm-5 mt-2 ">
+<div class=" mt-2 ">
   <div :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal" @click="incrementView(keep.id)" class="keepContainer">
-      <img :src="keep.img" class="img-fluid keepImg" alt="">
+      <img :src="keep.img" class="img-fluid rounded" alt="">
       <div class="bottom-left">{{keep.name}}</div>
       <div class="bottom-right"><img :src="keep.creator.picture" class="icon rounded" alt=""></div>
   </div>
@@ -15,7 +15,7 @@
               <img :src="keep.img" class="img-fluid rounded" alt="">
             </div>
             <div class="col-6 text-center">
-              <div class="row justify-content-center">
+              <div class="row justify-content-center h-25">
                 <div class="col-3 d-flex flex-row align-items-center">
                   <i class="mdi mdi-eye mdi-24px px-1"></i>{{keep.views}}
                 </div>
@@ -26,13 +26,14 @@
                   <i class="mdi mdi-share-variant mdi-24px pt-0 px-1"></i>{{keep.shares}}
                 </div>
               </div>
-              <div class="row text-center">
-                <h4 class="pt-2">{{keep.name}}</h4>
-              </div>
-              <div class="row text-center">
-                <div class="border-bottom py-3">{{keep.description}}</div>
-              </div>
-              <div class="row mt-2 align-items-center">
+                <div class="row text-center h-25">
+                  <h4 class="pt-2">{{keep.name}}</h4>
+                </div>
+                <div class="row text-center h-25">
+                  <div class="border-bottom py-3">{{keep.description}}</div>
+                </div>
+
+              <div class="row mt-2 align-items-center h-25">
                   <div class="col-4">
                     <select name="vaults" class="selectWidth" id="vault-select" @change="addVaultKeep($event, keep.id)">
                         <option value="">--Select a Vault--</option>
@@ -101,6 +102,7 @@ export default {
           await vaultKeepsService.CreateVaultKeeps(data)
           await keepsService.GetKeepById(keepId)
           AppState.activeKeep.keeps = AppState.activeKeep.keeps + 1
+          await keepsService.EditKeep(AppState.activeKeep) 
           const keepIndex = AppState.keeps.findIndex(k => k.id === keepId)
           AppState.keeps.splice(keepIndex, 1, AppState.activeKeep)
         }
@@ -151,10 +153,10 @@ export default {
 .break{
   word-break: break-all;
 }
-.keepImg{
-  height: 100%;
-  border-radius: 10%;
-}
+// .keepImg{
+//   height: 100%;
+//   border-radius: 10%;
+// }
 .keepContainer{
   position: relative;
     text-align: center;
@@ -172,6 +174,9 @@ export default {
 }
 .selectWidth{
   max-width: 100%;
+}
+.modelBody{
+  height: 50%;
 }
 
 </style>

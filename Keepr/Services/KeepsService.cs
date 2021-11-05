@@ -41,9 +41,9 @@ namespace Keepr.Services
       foundKeep.Name = data.Name ?? foundKeep.Name;
       foundKeep.Description = data.Description ?? foundKeep.Description;
       foundKeep.Img = data.Img ?? foundKeep.Img;
-      foundKeep.Views = data.Views;
-      foundKeep.Keeps = data.Keeps;
-      foundKeep.Views = data.Views;
+      foundKeep.Views = data.Views ?? foundKeep.Views;
+      foundKeep.Keeps = data.Keeps ?? foundKeep.Keeps;
+      foundKeep.Shares = data.Shares ?? foundKeep.Shares;
       return _kr.Edit(foundKeep);
     }
 

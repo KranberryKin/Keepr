@@ -1,5 +1,5 @@
 <template>
-  <div class="home row">
+  <div class="home masonry-with-columns">
     <Keep v-for="k in keeps" :key="k.id" :keep="k"/>
   </div>
 </template>
@@ -26,22 +26,19 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.masonry-with-flex {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+.masonry-with-columns {
+  columns: 4 200px;
+  column-gap: 1rem;
   div {
+    width: 150px;
     color: white;
+    margin: 0 1rem 1rem 0;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
     font-family: system-ui;
     font-weight: 900;
     font-size: 2rem;
-  } 
-  @for $i from 1 through 36 { 
-    div:nth-child(#{$i}) {
-      $h: (random(400) + 100) + px;
-      height: $h;
-      line-height: $h;
-    }
   }
 }
 // .grid {
