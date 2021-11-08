@@ -7,7 +7,7 @@
   </div>
   <Model :id="'keep-modal-' + keep.id">
     <template #modal-body>
-      <div class="row">
+      <div class="row text-dark">
         <div class="col-12">
           <button type="button" class="btn-close close" data-bs-dismiss="modal" aria-label="Close"></button>
           <div class="row">
@@ -29,8 +29,8 @@
                 <div class="row text-center h-25">
                   <h4 class="pt-2">{{keep.name}}</h4>
                 </div>
-                <div class="row text-center h-25">
-                  <div class="border-bottom py-3">{{keep.description}}</div>
+                <div class="row h-25">
+                  <div class="border-bottom py-3"><span>{{keep.description}}</span></div>
                 </div>
 
               <div class="row mt-2 align-items-center h-25">
@@ -47,7 +47,6 @@
                     <router-link :to="{name:'Profile', params:{profileId : keep.creatorId}}" >
                       <img :src="keep.creator.picture" class="rounded icon mx-1 action" alt="" :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal">
                     </router-link>
-                    <p class="break">{{keep.creator.name}}</p>
                   </div>
               </div>
             </div>

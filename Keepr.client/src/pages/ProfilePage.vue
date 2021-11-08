@@ -35,7 +35,7 @@
         <i class="mdi mdi-plus action"  :data-bs-target="'#keep-modal-' + profile.id" data-bs-toggle="modal"></i>
       </div>
     </div>
-    <div class="row mt-3" data-masonry='{"percentPosition": true }'>
+    <div class="mt-3 masonry-with-columns">
       <Keep v-for="k in keeps" :key="k.id" :keep="k" />
     </div>
     <FormModel :id="'keep-modal-' + profile.id">
@@ -82,5 +82,20 @@ export default {
 .profImg{
   max-width: 150px;
   border-radius: 15%;
+}
+.masonry-with-columns {
+  columns: 4 200px;
+  column-gap: 1rem;
+  div {
+    width: 150px;
+    color: white;
+    margin: 0 1rem 1rem 0;
+    display: inline-block;
+    width: 100%;
+    text-align: center;
+    font-family: system-ui;
+    font-weight: 900;
+    font-size: 2rem;
+  }
 }
 </style>
