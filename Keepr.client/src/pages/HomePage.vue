@@ -38,7 +38,6 @@ export default {
     text-align: center;
     font-family: system-ui;
     font-weight: 900;
-    font-size: 2rem;
   }
 }
 // .grid {

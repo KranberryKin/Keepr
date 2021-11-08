@@ -34,16 +34,16 @@
                 </div>
 
               <div class="row mt-2 align-items-center h-25">
-                  <div class="col-4">
+                  <div class="col-8">
                     <select name="vaults" class="selectWidth" id="vault-select" @change="addVaultKeep($event, keep.id)">
                         <option value="">--Select a Vault--</option>
                         <option v-for="v in vaults"  :key="v.id" :vault="v" :value="v.id">{{v.name}}</option>
                     </select>
                   </div>
-                  <div class="col-3">
+                  <div class="col-2">
                     <i class="mdi mdi-trash-can mdi-36px action"  :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal"  :class="keep.creatorId === user.id ? '':'visually-hidden'" @click="DeleteKeep(keep.id)"></i>
                   </div>
-                  <div class="col-5 d-flex flex-row">
+                  <div class="col-2 d-flex flex-row">
                     <router-link :to="{name:'Profile', params:{profileId : keep.creatorId}}" >
                       <img :src="keep.creator.picture" class="rounded icon mx-1 action" alt="" :data-bs-target="'#keep-modal-' + keep.id" data-bs-toggle="modal">
                     </router-link>
@@ -158,7 +158,7 @@ export default {
 // }
 .keepContainer{
   position: relative;
-    text-align: center;
+  text-align: center;
   color: white;
 }
 .bottom-left {
