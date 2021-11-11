@@ -26,4 +26,4 @@ jobs:
           heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
           # Name of the heroku application to which the build is to be sent.
           heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-          dockerfile_directory: ./keeper.server/  NOTE this is wherever your docker file is located usually in the server
+          dockerfile_directory: ./Keepr/  NOTE this is wherever your docker file is located usually in the server
