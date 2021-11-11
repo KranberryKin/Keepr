@@ -44,7 +44,7 @@ namespace Keepr.Controllers
                       return Ok(_vs.Get(vaultId));
                   }
                   var vault = _vs.GetValid(vaultId);
-                  if (vault.IsPrivate == true)
+                  if (vault.IsPrivate == true && userInfo.Id != vault.CreatorId)
                   {
                       if (vault.CreatorId != userInfo.Id)
                       {

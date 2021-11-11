@@ -61,10 +61,6 @@ namespace Keepr.Services
     public Vault Get(int id)
     {
       var foundVault = _vr.Get(id);
-      if (foundVault.IsPrivate == true)
-      {
-        throw new System.Exception("You can't do that");
-      }
       if (foundVault == null)
       {
         throw new System.Exception("Can't find Vault");
